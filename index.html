@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta name="chinaz-site-verification" content="15df7239-48fe-4b33-9aac-b7d740fbd5ee" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><{$smarty.const.WEBSITE}></title>
+<meta name="keywords" content="指南者,指南者教育,留学,海外,出国,出国留学,留学中介,支付宝支付">
+<meta name="description" content="英国留学香港留学新加坡留学，指南者教育—专注海外著名大学研究生申请，独家建立海外留学院校数据库，支持留学费用支付宝支付。">
+<link href="tpl/bigshow/css/index.css" type="text/css" rel="stylesheet" /> 
+<link rel="shortcut icon" href="tpl/bigshow/images/favicon.ico" type="image/x-icon" />
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-40271534-1', 'compassedu.hk');
+  ga('send', 'pageview');
+
+</script>
+</head>
+<body onselectstart="return false" >
+<script type="text/javascript">
+
+window.onload = function(){var $ = function (id) {
+    return "string" == typeof id ? document.getElementById(id) : id;
+};
+
+var Class = {
+  create: function() {
+    return function() {
+      this.initialize.apply(this, arguments);
+    }
+  }
+}
+
+Object.extend = function(destination, source) {
+    for (var property in source) {
+        destination[property] = source[property];
+    }
+    return destination;
+}
+
+function addEventHandler(oTarget, sEventType, fnHandler) {
+    if (oTarget.addEventListener) {
+        oTarget.addEventListener(sEventType, fnHandler, false);
+    } else if (oTarget.attachEvent) {
+        oTarget.attachEvent("on" + sEventType, fnHandler);
+    } else {
+        oTarget["on" + sEventType] = fnHandler;
+    }
+};
+
+
+var Scroller = Class.create();
+Scroller.prototype = {
+  initialize: function(idScroller, idScrollMid, options) {
+    var oScroll = this, oScroller = $(idScroller), oScrollMid = $(idScrollMid);
+    
+    this.heightScroller = oScroller.offsetHeight;
+    this.heightList = oScrollMid.offsetHeight;
+    
+    if(this.heightList <= this.heightScroller) return;
+    
+    oScroller.style.overflow = "hidden";
+    oScrollMid.appendChild(oScrollMid.cloneNode(true));
+    
+    this.oScroller = oScroller;    
+    this.timer = null;
+    
+    this.SetOptions(options);
+    
+    this.side = 1;//1是上 -1是下
+    switch (this.options.Side) {
+        case "down" :
+            this.side = -1;
+            break;
+        case "up" :
+        default :
+            this.side = 1;
+    }
+    
+    addEventHandler(oScrollMid , "mouseover", function() { oScroll.Stop(); });
+    addEventHandler(oScrollMid , "mouseout", function() { oScroll.Start(); });
+    
+    if(this.options.PauseStep <= 0 || this.options.PauseHeight <= 0) this.options.PauseStep = this.options.PauseHeight = 0;
+    this.Pause = 0;
+    
+    this.Start();
+  },
+  //设置默认属性
+  SetOptions: function(options) {
+    this.options = {//默认值
+      Step:            1,//每次变化的px量
+      Time:            100,//速度(越大越慢)
+      Side:            "up",//滚动方向:"up"是上，"down"是下
+      PauseHeight:    0,//隔多高停一次
+      PauseStep:    1000//停顿时间(PauseHeight大于0该参数才有效)
+    };
+    Object.extend(this.options, options || {});
+  },
+  //滚动
+  Scroll: function() {
+    var iScroll = this.oScroller.scrollTop, iHeight = this.heightList, time = this.options.Time, oScroll = this, iStep = this.options.Step * this.side;
+    
+    if(this.side > 0){
+        if(iScroll >= (iHeight * 2 - this.heightScroller)){ iScroll -= iHeight; }
+    } else {
+        if(iScroll <= 0){ iScroll += iHeight; }
+    }
+    
+    if(this.options.PauseHeight > 0){
+        if(this.Pause >= this.options.PauseHeight){
+            time = this.options.PauseStep;
+            this.Pause = 0;
+        } else {
+            this.Pause += Math.abs(iStep);
+            this.oScroller.scrollTop = iScroll + iStep;
+        }
+    } else { this.oScroller.scrollTop = iScroll + iStep; }
+    
+    this.timer = window.setTimeout(function(){ oScroll.Scroll(); }, time);
+  },
+  //开始
+  Start: function() {
+    this.Scroll();
+  },
+  //停止
+  Stop: function() {
+    clearTimeout(this.timer);
+  }
+};
+    new Scroller("naccept_content", "naccept_content1",{ PauseHeight:0 });
+}
+</script>
+<script type="text/javascript">
+function ScrollImgLeft(){
+var speed=20
+var scroll_begin = document.getElementById("nabout_scroll_begin");
+var scroll_end = document.getElementById("nabout_scroll_end");
+var scroll_div = document.getElementById("nabout_scroll_div");
+scroll_end.innerHTML=scroll_begin.innerHTML
+  function Marquee(){
+    if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0)
+      scroll_div.scrollLeft-=scroll_begin.offsetWidth
+    else
+      scroll_div.scrollLeft++
+  }
+var MyMar=setInterval(Marquee,speed)
+  scroll_div.onmouseover=function() {clearInterval(MyMar)}
+  scroll_div.onmouseout=function() {MyMar=setInterval(Marquee,speed)}
+}
+</script>
+<{include file="tpl/bigshow/float.html"}>
+<div id="container"><!--页面层容器-->
+<div id="Header"><!--页面头部-->
+	<{include file="tpl/bigshow/topshow.html"}>	
+</div>
+<div id="PageBody"><!--主体思想-->
+	<div class="naccept">
+		<div class="naccept_title">最新录取<a href="<{spUrl c=main a=acpt page=1}>">
+            <img src="tpl/bigshow/images/more.png" width="32" height="5"/></a></div>
+        <div id="naccept_content">
+        	<div id="naccept_content1">
+        	<ul>           
+			<{foreach from=$acpt item=one}>
+    			<li><a class="item" href="<{spUrl c=main a=newst id=$one.id_news}>" target="_blank">
+        		<{$one.title_news|strip_tags|truncate:12:"":true}></a></li>
+    		<{/foreach}>
+			</ul>
+            </div>
+        </div>
+	</div>    
+    
+    
+    <div class="ndatabase">
+    	<div class="ndatabase_title"><div class="index_title">海外名校</div>
+        </div>
+        <img src="tpl/bigshow/images/index_univ.jpg" />
+        <div class="ndatabase_intro1">指南者教育海外院校数据库</div><div class="ndatabase_intro2">指南者教育海外院校数据库提供美国、英国、新加坡、香港名校研究生申请信息。内容包括学校综述、专业介绍，申请信息、招生要求等。无需登陆国外院校网站，在繁琐的信息检索中徘徊；使用我们的专业选校和站内搜索功能，轻松选择最适合你的学校和专业。
+        </div>
+        
+        
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=8}>" target="_blank">牛津大学</a></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=9}>" target="_blank">剑桥大学</a></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=11}>" target="_blank">伦敦大学学院</a></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=3}>" target="_blank">帝国理工学院</a></div>
+        <div class="line"></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=11}>" target="_blank">伦敦大学国王学院</a></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=19}>" target="_blank">约克大学</a></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=39}>" target="_blank">南洋理工大学</a></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=40}>" target="_blank">新加坡国立大学</a></div>
+        <div class="line"></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=47}>" target="_blank">香港大学</a></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=41}>" target="_blank">香港中文大学</a></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=42}>" target="_blank">香港科技大学</a></div>
+        <div class="ndatabase_univ"><a href="<{spUrl c=main a=major id=44}>" target="_blank">香港理工大学</a></div>
+        <div class="line"></div>
+		<div class="ndatabase_btn"><a href="<{spUrl c=main a=clss cs=1}>">按专业选校</a></div>
+        <div class="ndatabase_btn"><a href="<{spUrl c=main a=univ cy=11}>">按国家选校</a></div>
+    </div>
+    
+    
+    
+    
+    <div class="nservice">
+    	<div class="nservice_title"><div class="index_title">特色服务</div>
+        </div>
+        <img src="tpl/bigshow/images/index_service.jpg" />
+        <ul>
+        	<li><a class="item" target="_blank" href="http://www.cscse.edu.cn/">中国留学网</a></li>
+            <li><a class="item" target="_blank" href="http://www.moe.edu.cn/">教育部</a></li>
+            <li><a class="item" target="_blank" href="http://edu.sina.com.cn/">新浪教育</a></li>
+            <li><a class="item" target="_blank" href="http://www.britishcouncil.org.cn/zh/china.htm">英国使馆文化教育处</a></li>
+            <li><a class="item" target="_blank" href="http://www.sino-education.org/">美国使馆教育处</a></li>
+        </ul>
+        
+       
+    </div>
+    
+    
+    
+    
+    <div class="ninfo">
+    	<div class="ninfo_title"><div class="index_title">留学资讯</div>
+        	<div class="ninfo_title_img">
+        	<a href="<{spUrl c=main a=newsp page=1}>">
+            <img src="tpl/bigshow/images/more.gif" width="32" height="5"/></a>
+        	</div>
+        </div>    
+        <div class="ninfo_img"><img src="tpl/bigshow/images/index_info.jpg" width="120" height="70" border="0"/></div>
+        <div class="ninfo_intro1"><{$news[0]['title_news']|strip_tags|truncate:12:"…":true}></div>
+        <div class="ninfo_intro2"><{$news[0]['content_news']|strip_tags|truncate:54:"…":true}><a  href="<{spUrl c=main a=newst id=$news[0]['id_news'] page=1}>" target="_blank">[详细]</a></div>
+        <hr />
+        <div class="ninfo_li">
+         <ul>
+         <{foreach from=$news item=one}>
+          <li><a class="item" href="<{spUrl c=main a=newst id=$one.id_news page=1}>" target="_blank"><{$one.title_news|strip_tags|truncate:30:"………":true}></a></li>
+          <{/foreach}>
+        </ul>
+        </div>
+    </div>
+    <div class="ninfo">
+    	<div class="ninfo_title"><div class="index_title">成功案例</div>
+        	<div class="ninfo_title_img">
+        	<a href="<{spUrl c=main a=succp page=1}>">
+            <img src="tpl/bigshow/images/more.gif" width="32" height="5"/></a>
+        	</div>
+        </div>
+        <div class="ninfo_img"><img src="tpl/bigshow/images/index_succ.jpg" width="120" height="70" border="0"/></div>
+        <div class="ninfo_intro1"><{$succ[0]['title_news']|strip_tags|truncate:12:"…":true}></div>
+        <div class="ninfo_intro2"><{$succ[0]['content_news']|strip_tags|truncate:60:"…":true}><a  href="<{spUrl c=main a=newst id=$succ[0]['id_news'] page=1}>" target="_blank">[详细]</a></div>
+        <hr />
+        <div class="ninfo_li">
+         <ul>
+         <{foreach from=$succ item=one}>
+          <li><a class="item" href="<{spUrl c=main a=newst id=$one.id_news page=1}>" target="_blank"><{$one.title_news|strip_tags|truncate:30:"………":true}></a></li>
+          <{/foreach}>
+        </ul>
+        </div>
+	</div>
+    
+    <div class="nshow">
+    <div class="nshow_top">
+    	<div class="btn"><a href="<{spUrl c=main a=univ cy=11}>">搜索学校</a>
+        </div>
+        <div class="btn"><a href="<{spUrl c=main a=clss cs=1}>">搜索专业</a>
+        </div>
+        <div class="btn"><a href="<{spUrl c=main a=msgn}>">在线评估</a>
+        </div>
+        <div class="btn"><a href="<{spUrl c=main a=about}>">服务流程</a>
+        </div>
+        <img width="200" src="tpl/bigshow/images/index_pay2.jpg" />
+    </div>
+    	<img src="tpl/bigshow/images/index_ad1.jpg" />
+    </div>
+    
+    
+    
+<div class="tamad">
+   
+    <div class="nabout">
+    	<div class="nabout_title"><div class="index_title">通知书展示</div>
+        <div class="nabout_title_img">
+        	<a href="<{spUrl c=main a=acpt page=1}>">
+            <img src="tpl/bigshow/images/more.gif" width="32" height="5"/></a>
+        </div>
+        </div>
+        
+        
+        <div id="nabout_scroll_div" class="nabout_scroll_div">
+      <div id="nabout_scroll_begin">
+        <ul>
+        
+        
+	<{foreach from=$imgs item=one name=test}>
+        	
+       			<li><a title="<{$imgs[$smarty.foreach.test.iteration-1]['title']}>" href="<{spUrl c=main a=newst id=$imgs[$smarty.foreach.test.iteration-1]['id'] page=1}>" 
+                target="_blank"><img alt="<{$imgs[$smarty.foreach.test.iteration-1]['title']}>" src="<{$imgs[$smarty.foreach.test.iteration-1]['img']}>" width="150" height="180" border="0"/></a>
+                </li>
+        	
+    <{/foreach}>
+    
+    
+     </ul>
+      </div>
+      <div id="nabout_scroll_end"></div>
+    </div>
+
+    <script type="text/javascript">ScrollImgLeft();</script>
+    
+	</div>  
+<div class="nfriends">
+    	<div class="nfriends_title"><div class="index_title">常用链接</div></div>
+        <div class="nfriends_content">
+        <ul>
+        	<li><a class="item" target="_blank" href="http://www.ntu.edu.sg">南洋理工大学</a></li>
+            <li><a class="item" target="_blank" href="http://www.nus.edu.sg/">新加坡国立大学</a></li>
+            <li><a class="item" target="_blank" href="http://www.hku.hk">香港大学</a></li>
+            <li><a class="item" target="_blank" href="http://www.ust.hk">香港科技大学</a></li>
+            <li><a class="item" target="_blank" href="http://www.cuhk.edu.hk">香港中文大学</a></li>
+            <li><a class="item" target="_blank" href="http://www.ucl.ac.uk">伦敦大学学院</a></li>
+            <li><a class="item" target="_blank" href="http://www.lse.ac.uk">伦敦政经学院</a></li>
+            <li><a class="item" target="_blank" href="http://www.cam.ac.uk">剑桥大学</a></li>
+        </ul>
+        </div>
+	</div>
+
+    
+</div>     
+</div>
+<div id="Footer"><!--页面底部-->
+	<{include file="tpl/bigshow/bottom_cm.html"}>	
+</div>
+</div>
+<script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F0a385319611ed1db7e2ee8bb5f6fcc05' type='text/javascript'%3E%3C/script%3E")); </script>
+
+</body>
+</html>
