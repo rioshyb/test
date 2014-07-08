@@ -6,9 +6,9 @@ define("WEBSITE","指南者教育");
 $spConfig = array(
 	"db" => array( // 数据库设置
 		'host' => 'localhost',
-		'login' => '',
-		'password' => '',
-		'database' => '',
+		'login' => 'rrew321',
+		'password' => 'hf',
+		'database' => 'ddf',
 		'prefix' => 'tb_',
 	),
 	'include_path'=>array(
@@ -38,6 +38,8 @@ $spConfig = array(
 	 	), 
 	 )
 );
+//乌日根的修改
+
 
 require(SP_PATH."/SpeedPHP.php");
 import('md5password.php');
