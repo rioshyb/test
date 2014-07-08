@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 define("SP_PATH",dirname(__FILE__)."/SpeedPHP");
 define("APP_PATH",dirname(__FILE__));
 define("DOMAIN","upload"); 
@@ -6,9 +6,9 @@ define("WEBSITE","指南者教育");
 $spConfig = array(
 	"db" => array( // 数据库设置
 		'host' => 'localhost',
-		'login' => 'root',
-		'password' => 'hyb',
-		'database' => 'way_db_515',
+		'login' => '',
+		'password' => '',
+		'database' => '',
 		'prefix' => 'tb_',
 	),
 	'include_path'=>array(
